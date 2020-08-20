@@ -1,0 +1,89 @@
+#  sql is the language and mysql is the DBMS
+#  SQL m likhna is not case sensitive, however we should write commands in uppercase (convention)
+#  end m semicolon lagana ni bhoolna
+#  System--> Databases--> Tables--> Column ( Headings for data )
+#  string in double inverted commas
+#  default in table is optional and is used when we want to give some defalut val if we didnt enter data in that field or sth
+#  primary key is used when we want unique values only in that field of the table
+#  to inrease a particular value of a field in table when every new value inserted we set AUTO_INCREMENT option with PRIMARY KEY and then we need not enter value in that field...
+   ....khud hi increase hote jayegi  
+# CONCAT() is used to add strings
+# SUBSTRING( pass_string, first_index, last_index) is used to access the letters of string from one point to another as set....index starts from 1 in sql
+# LIKE with % is used to search any sort of string in our data
+# to sort we use ORDER BY head_1 (here head_1 is the field we want to sort)
+
+
+# SQL commands with their use:
+	-SHOW DATABSES;                      (shows what all databases in our mysql server)
+	-CREATE DATABASE database_name ;     (creates the database as per name)
+	-DROP DATABASAE database_name ;      (deletes that database)
+	-USE database_name ;                 ( to use/select a particluar database to edit or viewing)
+	-STATUS;                             (to check current database selected and other details)
+	-SELECT DATABASE();		     (shows the current database name only)
+
+
+
+# Data types in sql:
+	- For integer : TINYINT, MEDIUMINT, INT, BIGINT
+	- For string : VARCHAR or CHAR
+	- For floating point : FLOAT, DOUBLE
+
+
+
+# Commands related to Table (first select the database using USE database_name as uske andar hi table banegi):
+
+	- CREATE TABLE table_name (heading_1 dataType(max_characters), heading_2 dataType);                                (creates a table with default value as NULL and NULL allowed..
+															      ....max_characters is set only when data type is string)	                   
+	- CREATE TABLE table_name (heading_1 dataType(max_characters) PRIMARY KEY, heading_2 dataType);		                    ( for no same values under heading 1)
+	- CREATE TABLE table_name (heading_1 dataType(max_characters), heading_2 dataType, PRIMARY KEY(heading_1));                 (alt of above option) 
+	- CREATE TABLE table_name (heading_1 dataType(max_characters) DEFAULT set_val, heading_2 dataType DEFAULT set_val );        ( for setting the default values )
+	- CREATE TABLE table_name (heading_1 dataType(max_characters) DEFAULT set_val NOT NULL, heading_2 dataType DEFAULT set_val NOT NULL);
+	- CREATE TABLE table_name (heading_1 dataType(max_characters) PRIMARY KEY AUTO_INCREMENT, heading_2 dataType);
+
+	- DESCRIBE table_name;                                        ( all the headings of that particular table)
+	- SHOW TABLES;                                                ( shows tables of the selected databsase)
+	- DROP TABLE table_name;                                      ( deletes that table)
+
+
+# Inserting data inside table:
+
+	-INSERT INTO table_name (head_1, head_2) VALUE ("val1", val2);                         ( Stores single value...string inside inverted commas...
+												 ...writing head_1, head_2 is optional 
+												 ....but in this way we can choose the heading and the data as per our order)	
+	-INSERT INTO table_name (head_1, head_2) VALUES ("val1_1", val1_2), ("val2_1", val2_2), ("val3_1", val3_2);
+	                                             
+
+# Accessing data of a table:
+
+	- SELECT * FROM table_name;                        ( displays all the data of that table)
+	- SELECT field_2, field_3 FROM table_name;         ( displays column 2 and 3 data from the table)
+	- SELECT * FROM table_name WHERE any_condition;    ( displays data which satisfies condition e.g. WHERE author = 'Appu' OR price <= 500;) 
+	- SELECT head_1 as new_head_1, head_2 FROM table_name ;  (displays data with heading 1 nsme changed)
+	- SELECT DISTINCT head_1 FROM table_name;               (displays only unique values under head_1)
+	- SELECT DISTINCT head_1, head_2 FROM table_name; 	            (displays only values whose jointly...like milake head_1, head_2 is unique...like first_name , last_name)
+	- SELECT CONACT(head_1, head_2) AS new_head  FROM table_name;       ( joins the two columns as one with heading as new_head....works for strings...' ' pass krkesapce gets added in btwn)
+
+	-UPDATE table_name SET head_2 = xyz WHERE head_3 = abc;   ( changes data of head_2 as xyz of that row whose head_3 is abc)
+
+	-DELETE FROM table_name;                     (deletes whole table)
+	-DELETE FROM table_name WHERE condition;     ( deletes where condition met)
+
+	- ALTER TABLE table_name ADD head_name datatype ;                                        (adds a new column...default etc bhi set krsakte like before)
+	- SELECT * (or head_1 or anything u want) FROM table_name ORDER BY head_2;                    (sorts head_2)
+	- SELECT * (or head_1 or anything u want) FROM table_name ORDER BY head_2 DESC;               (sorts head_2) 
+
+
+
+# With substring method, we can only check particular position in all data, to check a particular string, whether present or not in the data, we use ....WHERE head_1 LIKE "%any_string%";. 
+  % here implies any_string se pahle ya baad m (dusra wala %) kuch bhi aayega chalega. If it is written as any_string% this implies starting should be with that any_string only."_____" is any_string 
+  maanlo 5 underscores h...they are used to find all 5 letter data under that field.
+
+# Suppose u are sorting sth and in that u need only x entries...if more than x are there of same value...then they will be removed. this is done by adding..... LIMIT x; in that condition.
+
+# To run any file having sql data....we write SOURCE file_path  ( no inverted commas...and data can be generated too fro online data generator)
+
+# to count the number of rows we write: SELECT COUNT(*) FROM table_name; ...isme if we write * k badle any heading with DISTINT...then unique itmes count ho jayenge
+
+# to group same data of any field...we use GROUP BY option....SELECT * FROM table_name GROUP BY head_1;...visually ek hi heading hogi..but uske andar data us group ka ek sath h
+
+# to count how many of one type are present ina field, we can write as: SELECT head_1, COUNT(*) FROM table_name GROUP BY head_1;
